@@ -9,4 +9,4 @@ lean_lib TaplLean where
   globs := #[Glob.submodules `TaplLean]
 
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4"
+  "https://github.com/leanprover-community/mathlib4" @ "v4.28.0"
