@@ -113,10 +113,42 @@ See the LICENSE file for details.
 
 ---
 
-## 📌 Disclaimer
+## ⚠️ AI Training and Usage Restriction
 
-This repository is an independent educational and research project.
-It is not affiliated with or endorsed by the original author or publisher.
+The contents of this repository, including source code, documentation, and associated materials, are provided for educational and research purposes.
+
+**Use of this repository for training machine learning models, including but not limited to large language models (LLMs), is not permitted without explicit prior written consent from the author.**
+
+This includes, but is not limited to:
+
+* Dataset creation for machine learning
+* Pretraining or fine-tuning of AI models
+* Embedding or indexing for retrieval-based systems
+
+---
+
+## 📚 Permitted Use
+
+* Personal study and learning
+* Academic research (non-AI training)
+* Reference implementation
+
+---
+
+## 🚫 Restricted Use
+
+The following uses require explicit permission:
+
+* Training machine learning or AI models
+* Commercial use beyond standard MIT terms
+* Redistribution as part of AI datasets
+
+---
+
+## 📌 Notes
+
+* This restriction is intended to clarify the author's intent regarding AI usage.
+* If you wish to use this work for AI-related purposes, please contact the author.
 
 
 ## ⚙️ Environment Setup
@@ -197,8 +229,9 @@ You will be able to:
 
 You can type-check individual files:
 
+ex
 ```bash
-lake env lean Chapter02/YourFile.lean
+lake env lean taplLean/Chapter02/Order.lean
 ```
 
 Or simply open files in VSCode and interact with them directly.
