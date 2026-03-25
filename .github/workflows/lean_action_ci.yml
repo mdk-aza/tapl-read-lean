@@ -2,8 +2,16 @@ name: Lean Action CI
 
 on:
   push:
+    branches:
+      - main
+
   pull_request:
-  workflow_dispatch:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   build:
