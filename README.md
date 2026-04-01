@@ -1,3 +1,5 @@
+This project is part of my preparation for research in programming languages, particularly in type systems and formal methods.
+
 # TaPL Formalization in Lean 4
 
 This repository contains a systematic formalization of concepts from:
@@ -87,7 +89,7 @@ tapl-lean/
 
 ## 🚀 Status
 
-* [x] Chapter 2 (in progress)
+* [ ] Chapter 2 (in progress)
 * [ ] Chapter 3
 * [ ] Chapter 4–7
 * [ ] STLC formalization
