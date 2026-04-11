@@ -2,6 +2,7 @@
 
 ![Lean](https://img.shields.io/badge/Lean-4-blue)
 ![Status](https://img.shields.io/badge/status-in_progress-yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 🇺🇸 English version → [README.md](README.md)
 
