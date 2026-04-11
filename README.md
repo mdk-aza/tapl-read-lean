@@ -1,257 +1,116 @@
-This project is part of my preparation for research in programming languages, particularly in type systems and formal methods.
+# Bidirectional Typing in Lean 4
 
-# TaPL Formalization in Lean 4
+This directory provides a formalization of **Bidirectional Type Systems** in Lean 4, as part of the broader project:
 
-This repository contains a systematic formalization of concepts from:
+> **Type Systems in Lean 4**
 
-> Benjamin C. Pierce, *Types and Programming Languages*, MIT Press.
-
-using the Lean 4 proof assistant.
+It builds on foundational material inspired by *Types and Programming Languages (TaPL)* and extends it toward modern type system research.
 
 ---
 
 ## 🎯 Purpose
 
-The goals of this project are:
-
-* To reconstruct the full theoretical development of *TaPL* in Lean 4
-* To deepen understanding of programming language theory through formalization
-* To mechanize definitions, semantics, and proofs (e.g., preservation and progress)
-* To build a research-oriented foundation in type systems and formal methods
+- **Mechanization**: Implement a sound and deterministic bidirectional type-checking algorithm in Lean 4.
+- **Verification**: Prove key meta-theoretical properties such as:
+    - **Soundness** (the algorithm respects typing rules)
+    - **Uniqueness** (type synthesis is deterministic)
+- **Research**: Explore design principles of bidirectional typing from modern PL literature.
+- **Extensibility**: Serve as a foundation for more advanced systems (e.g., Subtyping, System F, Dependent Types).
 
 ---
 
 ## 📚 Scope
 
-This project aims to cover:
+This directory currently formalizes a **Simply Typed Lambda Calculus (STLC)** with type annotations:
 
-* **Chapter 2–3**: Mathematical preliminaries (relations, orders)
-* **Chapter 4–7**: Untyped arithmetic expressions and operational semantics
-* **Chapter 8–12**: Simply Typed Lambda Calculus (STLC)
-* **Later chapters** (planned):
+- **Checking Mode ($\Leftarrow$)**  
+  Handles introduction forms (e.g., unit, lambda abstractions)
 
-    * Subtyping
-    * System F
-    * Recursive types
-    * Advanced type systems
+- **Synthesis Mode ($\Rightarrow$)**  
+  Handles elimination forms (e.g., variables, applications, annotations)
 
-Each chapter is reconstructed in Lean, not translated.
-
----
-
-## ⚠️ Copyright & Attribution
-
-* This repository **does NOT reproduce the original text**
-* All definitions and proofs are **original implementations**
-* The work is **inspired by**:
-
-Benjamin C. Pierce,
-*Types and Programming Languages*, MIT Press.
-
-No copyrighted material from the book is included.
+- **Mode Interaction**  
+  Includes implicit subsumption from synthesis to checking
 
 ---
 
 ## 🔬 Research Context
 
-This project is part of a broader research direction including:
+This formalization is informed by:
 
-* Formal verification of programming languages
-* Type soundness proofs (preservation & progress)
-* Mechanization of type systems
-* Connections to real-world languages such as TypeScript
+- **Jana Dunfield and Neel Krishnaswami (2020)**  
+  *Bidirectional Typing* (arXiv:1908.05839)
 
-Future research directions include:
-
-* Formalization of structural typing systems (e.g., MiniTS-Core)
-* Subtyping and advanced type relations
-* Integration with effect systems and modern FP techniques
+- **Benjamin C. Pierce (2002)**  
+  *Types and Programming Languages (TaPL)*
 
 ---
 
-## 🏗️ Project Structure
+### Core Design Principles
 
-```text
-tapl-lean/
-├── Chapter02/   # Relations, orders
-├── Chapter03/   # Additional mathematical structures
-├── Chapter04/   # Arithmetic expressions
-├── Chapter05/   # Operational semantics
-├── Chapter06/
-├── Chapter07/
-├── Chapter08/   # STLC begins
-├── ...
-├── Common/      # Shared definitions
-└── lakefile.lean
-```
+- **Mode Correctness**  
+  Inputs and outputs are consistent within each judgment
+
+- **Completeness**  
+  All typable terms (with annotations) are handled
+
+- **Pfenning Recipe**
+    - Introduction → Checking
+    - Elimination → Synthesis
 
 ---
 
-## 🚀 Status
+## 🧠 Technical Highlights (Lean 4)
 
-* [ ] Chapter 2 (in progress)
-* [ ] Chapter 3
-* [ ] Chapter 4–7
-* [ ] STLC formalization
-* [ ] Type soundness proofs
+- **Termination Proof**  
+  Using a lexicographic measure: $(sizeOf(e), mode)$
+
+- **Proof as Program (Curry–Howard)**  
+  Determinism (uniqueness) is implemented via structural recursion
+
+- **Reuse of Formal Foundations**  
+  Builds upon core definitions and lemmas from `Common/` and the TaPL formalization (e.g., syntax, typing relations, and operational semantics)
 
 ---
 
-## 🧠 Notes
+## 🔗 Relation to Other Directories
 
-* This is a **reconstruction project**, not a translation
-* Emphasis is placed on:
+- `TaPL/`  
+  Provides foundational formalizations (relations, STLC, etc.)
 
-    * clarity of definitions
-    * proof structure
-    * extensibility toward research topics
+- `Common/`  
+  Shared utilities (relations, closures, helper lemmas)
+
+- `Bidirectional/` (this directory)  
+  Extends STLC toward algorithmic typing
+
+---
+
+## 🚀 Future Work
+
+- [ ] Subtyping ($A <: B$)
+- [ ] System F (polymorphism)
+- [ ] Dependent types
+- [ ] Effect systems
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License.
-See the LICENSE file for details.
 
 ---
 
 ## ⚠️ AI Training and Usage Restriction
 
-The contents of this repository, including source code, documentation, and associated materials, are provided for educational and research purposes.
-
-**Use of this repository for training machine learning models, including but not limited to large language models (LLMs), is not permitted without explicit prior written consent from the author.**
-
-This includes, but is not limited to:
-
-* Dataset creation for machine learning
-* Pretraining or fine-tuning of AI models
-* Embedding or indexing for retrieval-based systems
+Use of this directory for training machine learning models is **not permitted** without explicit prior consent.
 
 ---
 
-## 📚 Permitted Use
+## ⚙️ Setup
 
-* Personal study and learning
-* Academic research (non-AI training)
-* Reference implementation
-
----
-
-## 🚫 Restricted Use
-
-The following uses require explicit permission:
-
-* Training machine learning or AI models
-* Commercial use beyond standard MIT terms
-* Redistribution as part of AI datasets
-
----
-
-## 📌 Notes
-
-* This restriction is intended to clarify the author's intent regarding AI usage.
-* If you wish to use this work for AI-related purposes, please contact the author.
-
-
-## ⚙️ Environment Setup
-
-### Installing Lean
-
-Please follow the official installation guide:
-
-https://aconite-ac.github.io/how_to_install_lean/how-to-install.html
-
----
-
-### Setup
-
-After installing Lean, run the following command to download dependencies:
+From the repository root:
 
 ```bash
 lake update && lake exe cache get
-```
-
----
-
-### Recommended Editor
-
-Using a VSCode-based editor (including Cursor) is highly recommended.
-
-With the Lean 4 extension, you can:
-
-* Check whether proofs are valid in real time
-* Inspect goals and context interactively
-* Improve productivity when developing formal proofs
-
-Setup instructions can be found here:
-
-https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/manual/manual.md
-
----
-
-### Docker (Optional)
-
-If you prefer using Docker, the following guide may be helpful:
-
-https://zenn.dev/chantakan/articles/9166197c6acaf9
-
-## 🚀 Quick Start
-
-Clone the repository and set up the environment:
-
-```bash
-git clone https://github.com/mdk-aza/tapl-read-lean.git
-cd tapl-lean
-lake update && lake exe cache get
-```
-
----
-
-### Build the project
-
-```bash
 lake build
-```
-
----
-
-### Open in VSCode
-
-Open the project folder in VSCode (or Cursor) with the Lean 4 extension installed.
-
-You will be able to:
-
-* See proof states interactively
-* Navigate definitions and theorems
-* Get real-time feedback on errors
-
----
-
-### Run Lean files
-
-You can type-check individual files:
-
-ex
-```bash
-lake env lean taplLean/Chapter02/Order.lean
-```
-
-Or simply open files in VSCode and interact with them directly.
-
----
-
-### Example workflow
-
-1. Open a `.lean` file
-2. Write or modify definitions / proofs
-3. Check the goal state in the editor
-4. Iterate until the proof is complete
-
----
-
-### Notes
-
-* Make sure Lean and Lake are properly installed
-* VSCode + Lean extension is strongly recommended
-* Use `lake build` if dependencies are updated
-

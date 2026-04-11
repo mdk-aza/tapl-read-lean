@@ -48,24 +48,13 @@ variable {α : Type}
 -- 集合 S : Set α
 variable (S T : Set α) (x : α)
 
--- x ∈ S
--- xはSに含まれる、xはSの要素である
-#check x ∈ S
-
-/- 空集合 ∅ -/
-#check (∅ : Set α)
-
 /- 部分集合 S ⊆ T -/
 example (S T : Set α) : Prop := S ⊆ T
-
--- 部分集合
-#check S ⊆ T
 
 /- 差集合 S \ T -/
 example (S T : Set α) : Set α := S \ T
 
 -- rflは反射律
-
 -- S \ Tの証明
 example (S T : Set α) :
     S \ T = {x | x ∈ S ∧ x ∉ T} := by
@@ -77,9 +66,7 @@ example (S T : Set α) :
 -- ほとんどの場合は by に続けてタクティクを用いる方が
 -- 読み書きが楽になるとされています
 
-/- べき集合 𝒫(S) -/
-#check Set.powerset
-
+/- べき集合 𝒫(S) Set.powerset -/
 example (S : Set α) : Set (Set α) := Set.powerset S
 
 -- 𝒫(S)の証明
@@ -94,17 +81,16 @@ example (S : Set α) :
 
 end TaPL211
 
-
 namespace TaPL211Concrete
 
 /-!
 2.1 の要点
 - 集合 = 条件 = α → Prop
 - 関係 = 条件を満たす組 = α → β → Prop
-- dom = ∃ で「左側に出現するもの」を取り出す
-- 関数 = 関係 + 一意性
-- 部分関数 = 「値がない入力」があってもよい関数的関係
-- 保存 = 関係で進んでも条件が保たれる
+-- - dom = ∃ で「左側に出現するもの」を取り出す
+-- - 関数 = 関係 + 一意性
+-- - 部分関数 = 「値がない入力」があってもよい関数的関係
+-- - 保存 = 関係で進んでも条件が保たれる
 -/
 
 ------------------------------------------------------------------------
