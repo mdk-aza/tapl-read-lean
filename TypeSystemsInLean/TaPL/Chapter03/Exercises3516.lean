@@ -107,18 +107,23 @@ theorem progress (t : Term) : IsValue t ∨ ∃ t', Step t t' := by
   -- pred, iszero も succ と同様に、「引数が正しい型か、そうでなければ wrong か」を
   -- 反転（cases hv）によって網羅的にチェックすることで進行性を示す
   | pred t ih =>
-    right
-    cases ih with
-    | inl hv =>
-      cases hv with
-      | v_nv hnv =>
-        cases hnv with
-        | nv_zero => exists zero; constructor
-        | nv_succ hnv' => exists _; apply Step.s_predsucc; exact hnv'
-      | v_true  => exists wrong; apply Step.e_pred_wrong; exact Or.inr (Or.inl rfl); apply IsValue.v_true
-      | v_false => exists wrong; apply Step.e_pred_wrong; exact Or.inr (Or.inr rfl); apply IsValue.v_false
-      | v_wrong => exists wrong; apply Step.e_pred_wrong; exact Or.inl rfl; apply IsValue.v_wrong
-    | inr hs => match hs with | ⟨t', hs'⟩ => exists (pred t'); constructor; exact hs'
+      right
+      cases ih with
+      | inl hv =>
+        cases hv with
+        | v_nv hnv =>
+          cases hnv with
+          | nv_zero => exists zero; constructor
+          -- ここで「t_inner」などの名前を明示的に取り出す
+          | nv_succ hnv' =>
+            -- hnv' は「IsNumericValue t_inner」という形になっているはずです
+            -- exists の後ろに、その中身の項を直接指定します
+            rename_i t_inner
+            exists t_inner; apply Step.s_predsucc; exact hnv'
+        | v_true  => exists wrong; apply Step.e_pred_wrong; exact Or.inr (Or.inl rfl); apply IsValue.v_true
+        | v_false => exists wrong; apply Step.e_pred_wrong; exact Or.inr (Or.inr rfl); apply IsValue.v_false
+        | v_wrong => exists wrong; apply Step.e_pred_wrong; exact Or.inl rfl; apply IsValue.v_wrong
+      | inr hs => match hs with | ⟨t', hs'⟩ => exists (pred t'); constructor; exact hs'
   | iszero t ih =>
     right
     cases ih with
